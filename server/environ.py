@@ -14,6 +14,8 @@ Config = CustomConfig(pathlib.Path(__file__).parent.parent / '.env')
 
 del CustomConfig
 
+__all__ = ['Config']
+
 if __name__ == '__main__':
     if Config.isLocal:
         print('Running on Local Machine')

@@ -1,4 +1,13 @@
+# API
 fastapi
 uvicorn
 starlette
+
+
+# DATABASE
+sqlalchemy
+psycopg2
+
+
+# UTILS
 pathlib
