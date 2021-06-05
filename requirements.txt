@@ -2,7 +2,7 @@
 fastapi
 uvicorn
 starlette
-
+python-multipart
 
 # DATABASE
 sqlalchemy
@@ -11,3 +11,8 @@ psycopg2
 
 # UTILS
 pathlib
+
+
+# SECURITY
+python-jose[cryptography]
+passlib[bcrypt]
