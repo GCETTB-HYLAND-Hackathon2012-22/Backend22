@@ -24,6 +24,6 @@ async def get_vendors_list(db: Session = Depends(get_db), skip: int = None, limi
 
 ###############################################################
 
-router.mount("/", StaticFiles(
-    directory=pathlib.Path(__file__).parent.parent / "static"
-))
+# router.mount("/", StaticFiles(
+#     directory=pathlib.Path(__file__).parent.parent / "static"
+# ))
