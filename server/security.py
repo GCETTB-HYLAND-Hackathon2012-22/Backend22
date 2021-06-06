@@ -98,6 +98,7 @@ async def login(db: Session = Depends(get_db), form_data: OAuth2PasswordRequestF
 
 @router.post('/api/register', response_model=models.User)
 async def register(user: models.UserCreate, db: Session = Depends(get_db)):
+    # TODO: Check for duplicate values
     user.password = get_password_hash(user.password)
     return crud.create_user(db, user)
 

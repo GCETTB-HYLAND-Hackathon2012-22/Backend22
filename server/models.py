@@ -30,3 +30,9 @@ class Doctor(BaseModel):
 
     class Config:
         orm_mode = True
+
+class Vendor(BaseModel):
+    user_obj: User
+
+    class Config:
+        orm_mode = True
