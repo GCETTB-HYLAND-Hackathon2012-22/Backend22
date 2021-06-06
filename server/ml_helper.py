@@ -16,7 +16,7 @@ class Covi_Tracker(BaseModel):
     attended_large_gathering: bool
 
 
-with open(pathlib.Path(__file__).parent/'ML-integrations22'/'Covid Checker'/'checker.pkl', 'rb') as file:
+with open(pathlib.Path(__file__).parent/'model'/'checker.pkl', 'rb') as file:
     '''Loads Saved Model during Import'''
     model: LogisticRegression = pickle.load(file)
 
