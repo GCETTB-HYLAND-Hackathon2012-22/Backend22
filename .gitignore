@@ -130,3 +130,5 @@ dmypy.json
 
 # Temporary Local Database ( Sqlite )
 sql_app.db
+
+.vscode
