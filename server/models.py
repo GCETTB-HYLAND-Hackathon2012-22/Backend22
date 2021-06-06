@@ -12,10 +12,21 @@ class UserBase(BaseModel):
 
 class UserCreate(UserBase):
     password: str
-    
 
 class User(UserBase):
     is_active: bool
     
+    class Config:
+        orm_mode = True
+
+class Admin(BaseModel):
+    user_obj: User
+
+    class Config:
+        orm_mode = True
+
+class Doctor(BaseModel):
+    user_obj: User
+
     class Config:
         orm_mode = True

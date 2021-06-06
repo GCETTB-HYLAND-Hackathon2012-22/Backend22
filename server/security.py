@@ -105,3 +105,15 @@ async def register(user: models.UserCreate, db: Session = Depends(get_db)):
 @router.get("/api/users/me", response_model=models.User)
 async def read_users_me(current_user: schema.User = Depends(get_current_active_user)):
     return current_user
+
+
+@router.get("/api/users/me_as_admin", response_model=models.Admin)
+async def read_users_me(db: Session = Depends(get_db), current_user: schema.User = Depends(get_current_active_user)):
+    admin = crud.get_admin(db, current_user.user_id)
+    if not admin:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Admin Permission Not Found",
+            headers={'WWW-Authenticate': 'Bearer'},
+        )
+    return admin;

@@ -53,7 +53,6 @@ class Vendor(Base):
     wp_no = Column(Integer)
     delivery_capacity = Column(Integer)
     store_id = Column(String)
-    vendor_products = relationship('Vendor_Product')
 
 
 class Vendor_Product(Base):
