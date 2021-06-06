@@ -17,3 +17,8 @@ pathlib
 # SECURITY
 python-jose[cryptography]
 passlib[bcrypt]
+
+
+# ML-INTEGRATION
+scikit-learn
+pandas

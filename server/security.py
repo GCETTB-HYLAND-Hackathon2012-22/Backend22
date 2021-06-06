@@ -105,6 +105,7 @@ async def register(user: models.UserCreate, db: Session = Depends(get_db)):
 
 @router.get("/api/users/me", response_model=models.User)
 async def read_users_me(current_user: schema.User = Depends(get_current_active_user)):
+    '''Returns current logged-in user'''
     return current_user
 
 

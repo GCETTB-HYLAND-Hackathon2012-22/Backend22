@@ -1,3 +1,5 @@
+# Collections of all pydantic models
+
 from datetime import date
 from pydantic import BaseModel
 
