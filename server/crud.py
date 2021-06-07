@@ -4,9 +4,20 @@ from typing import List
 from sqlalchemy.orm import Session
 from . import schema, models
 
+
 def get_user(db: Session, uid: str) -> schema.User:
     '''Returns User Details identified by uid'''
     return db.query(schema.User).filter(schema.User.user_id == uid).first()
+
+def get_user_email(db: Session, email: str) -> schema.User:
+    '''Returns User Details identified by email'''
+    return db.query(schema.User).filter(schema.User.email_id == email).first()
+
+def get_user_contact(db: Session, contact: int) -> schema.User:
+    '''Returns User Details identified by contact'''
+    return db.query(schema.User).filter(schema.User.contact_no == contact).first()
+
+
 
 def create_user(db: Session, user: models.UserCreate) -> schema.User:
     db_user = schema.User(**user.dict(), is_active=True)
@@ -14,6 +25,8 @@ def create_user(db: Session, user: models.UserCreate) -> schema.User:
     db.commit()
     db.refresh(db_user)
     return db_user
+
+# def verify_user(db: Session, user:)
 
 
 def get_admin(db: Session, uid: str) -> schema.Admin:
