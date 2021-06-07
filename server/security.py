@@ -19,7 +19,7 @@ ALGORITHM = Config.ALGORITHM
 ACCESS_TOKEN_EXPIRE_DAYS = 3
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="api/auth")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth")
 
 
 def get_password_hash(password: str) -> str:
