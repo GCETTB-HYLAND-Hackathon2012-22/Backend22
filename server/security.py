@@ -99,19 +99,19 @@ async def login(db: Session = Depends(get_db), form_data: OAuth2PasswordRequestF
 @router.post('/api/register', response_model=models.User)
 async def register(user: models.UserCreate, db: Session = Depends(get_db)):
     # Check for duplicate values
-    if crud.get_user(user.user_id):
+    if crud.get_user(db, user.user_id):
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Username already registered"
         )
     
-    if crud.get_user_email(user.email_id):
+    if crud.get_user_email(db, user.email_id):
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Email Id already registered"
         )
     
-    if crud.get_user_contact(user.contact_no):
+    if crud.get_user_contact(db, user.contact_no):
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Contact No already registered"
