@@ -1,6 +1,6 @@
 import pathlib
 from typing import List
-from fastapi import Depends
+from fastapi import Depends, UploadFile, File, HTTPException, status
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from .router import router
@@ -19,12 +19,46 @@ async def get_doctors_list(db: Session = Depends(get_db), skip: int = None, limi
     return crud.get_doctors(db, skip, limit)
 
 
+@router.get('/api/doctor/{uid}', response_model=models.Doctor)
+async def get_doctor_by_uid(uid: str, db: Session = Depends(get_db)):
+    '''Returns the doctor with the following uid'''
+    res = crud.get_doctor(db, uid)
+    if not res:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail='No doctor found with given uid'
+        )
+    return res
+
+
 @router.get('/api/vendors', response_model=List[models.Vendor])
 async def get_vendors_list(db: Session = Depends(get_db), skip: int = None, limit: int = None):
     '''Returns the list of all vendors in a paginated format'''
     return crud.get_vendors(db, skip, limit)
 
 
-@router.post('/api/covi_tracker')
+@router.get('/api/vendor/{uid}', response_model=models.Vendor)
+async def get_vendor_by_uid(uid: str, db: Session = Depends(get_db)):
+    '''Returns the vendor with the following uid'''
+    res = crud.get_vendor(db, uid)
+    if not res:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail='No vendor found with given uid'
+        )
+    return res
+
+
+# COVI-CHECKER
+
+@router.post('/api/covi_checker')
 async def predict_covid(symptoms: ml_helper.Covi_Tracker):
     return {'result': ml_helper.predict(symptoms)}
+
+
+@router.post('/api/covi_checker/from_image')
+async def predict_covid_from_image(file: UploadFile = File(...)):
+    raise HTTPException(
+        status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+        detail='Not Implemented Yet'
+    )
