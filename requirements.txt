@@ -2,6 +2,7 @@
 fastapi
 uvicorn
 aiofiles
+jinja2
 starlette
 python-multipart
 

@@ -1,5 +1,7 @@
-from typing import Literal, Union
-from fastapi import HTTPException, status, Depends, responses
+import pathlib
+from typing import Union
+from fastapi import HTTPException, status, Depends
+from fastapi.responses import HTMLResponse
 
 from .environ import Config
 from .router import router
@@ -56,7 +58,7 @@ def send_confirmation_mail(email: str) -> None:
         server.sendmail(sender_email, email, m)
 
 
-@router.get('/api/users/confirm/{token}')
+@router.get('/api/users/confirm/{token}', response_class=HTMLResponse)
 async def confirm_token_endpoint(token: str, db: Session = Depends(get_db)):
     error = HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
@@ -72,4 +74,4 @@ async def confirm_token_endpoint(token: str, db: Session = Depends(get_db)):
     
     user.is_confirmed = True
     crud.update_user(db, user)
-    return "Email Verified"
+    return pathlib.Path(__file__).parent.parent/'pages'/'email_confirmed.html'
