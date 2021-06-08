@@ -17,6 +17,7 @@ class UserCreate(UserBase):
 
 class User(UserBase):
     is_active: bool
+    is_confirmed: bool
     
     class Config:
         orm_mode = True

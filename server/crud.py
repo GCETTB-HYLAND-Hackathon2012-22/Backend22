@@ -17,10 +17,13 @@ def get_user_contact(db: Session, contact: int) -> schema.User:
     '''Returns User Details identified by contact'''
     return db.query(schema.User).filter(schema.User.contact_no == contact).first()
 
-
+def update_user(db: Session, user: schema.User):
+    db.add(user)
+    db.commit()
+    db.refresh(user)
 
 def create_user(db: Session, user: models.UserCreate) -> schema.User:
-    db_user = schema.User(**user.dict(), is_active=True)
+    db_user = schema.User(**user.dict(), is_active=True, is_confirmed=False)
     db.add(db_user)
     db.commit()
     db.refresh(db_user)

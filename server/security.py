@@ -1,9 +1,8 @@
 # Handles Login
 
-from starlette.responses import HTMLResponse
 from server import models
 from typing import Literal, Union
-from . import crud, schema
+from . import crud, schema, email_verification
 from .environ import Config
 from .database import get_db
 from .router import router
@@ -72,7 +71,10 @@ async def get_current_user(db: Session = Depends(get_db), token: str = Depends(o
 async def get_current_active_user(current_user: schema.User = Depends(get_current_user)) -> schema.User:
     '''Retrive Current User and also check if the user is active or not'''
     if not current_user.is_active:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Inactive user")
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Your Account has been Blocked. Contact Admin"
+        )
     return current_user
 
 
@@ -89,6 +91,21 @@ async def login(db: Session = Depends(get_db), form_data: OAuth2PasswordRequestF
             detail="Incorrect username or password",
             headers={'WWW-Authenticate': 'Bearer'},
         )
+    
+    if not user.is_active:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Your Account has been Blocked. Contact Admin",
+            headers={'WWW-Authenticate': 'Bearer'},
+        )
+    
+    if not user.is_confirmed:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Check Your Inbox for Email Verification",
+            headers={'WWW-Authenticate': 'Bearer'},
+        )
+    
     access_token_expires = timedelta(days=ACCESS_TOKEN_EXPIRE_DAYS)
     access_token = create_access_token(
         data={"sub": user.user_id, "exp": datetime.utcnow() + access_token_expires}
@@ -118,6 +135,7 @@ async def register(user: models.UserCreate, db: Session = Depends(get_db)):
         )
 
     user.password = get_password_hash(user.password)
+    email_verification.send_confirmation_mail(user.email_id)
     return crud.create_user(db, user)
 
 

@@ -10,6 +10,7 @@ class User(Base):
     user_id = Column(String, primary_key=True)
     password = Column(String)
     is_active = Column(Boolean)
+    is_confirmed = Column(Boolean)
     first_name = Column(String)
     last_name = Column(String)
     email_id = Column(String)
