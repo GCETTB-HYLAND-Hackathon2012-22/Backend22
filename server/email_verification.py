@@ -11,6 +11,9 @@ from jose import JWTError, jwt
 
 import smtplib, ssl
 
+with open(pathlib.Path(__file__).parent.parent/'pages'/'email_confirmed.html', 'r') as file:
+    CONFIRM_PAGE_HTML: str = file.read()
+
 
 SECRET_KEY = Config.SECRET_KEY
 ALGORITHM = Config.ALGORITHM
@@ -74,4 +77,4 @@ async def confirm_token_endpoint(token: str, db: Session = Depends(get_db)):
     
     user.is_confirmed = True
     crud.update_user(db, user)
-    return pathlib.Path(__file__).parent.parent/'pages'/'email_confirmed.html'
+    return CONFIRM_PAGE_HTML
