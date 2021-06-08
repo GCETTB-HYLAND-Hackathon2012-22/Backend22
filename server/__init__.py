@@ -52,7 +52,7 @@ async def get_vendor_by_uid(uid: str, db: Session = Depends(get_db)):
 # COVI-CHECKER
 
 @router.post('/api/covi_checker')
-async def predict_covid(symptoms: ml_helper.Covi_Tracker):
+async def predict_covid(symptoms: ml_helper.Covi_Checker):
     return {'result': ml_helper.predict(symptoms)}
 
 

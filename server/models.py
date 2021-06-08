@@ -1,6 +1,6 @@
 # Collections of all pydantic models
 
-from datetime import date
+from datetime import date, time
 from pydantic import BaseModel
 
 class UserBase(BaseModel):
@@ -24,18 +24,36 @@ class User(UserBase):
 
 class Admin(BaseModel):
     user_obj: User
+    workspace: str
+    designation: str
+    experience: int
+    license_id: int
 
     class Config:
         orm_mode = True
 
 class Doctor(BaseModel):
     user_obj: User
+    specialization: str
+    visiting_hr: time
+    fees: int
+    assistant_contact_no: int
+    website: str
+    chamber_city: str
 
     class Config:
         orm_mode = True
 
 class Vendor(BaseModel):
     user_obj: User
+    store_name: str
+    country: str
+    state: str
+    district: str
+    city_or_village_name: str
+    store_contact_no: int
+    wp_no: int
+    delivery_capacity: int
 
     class Config:
         orm_mode = True

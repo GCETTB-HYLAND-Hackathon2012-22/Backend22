@@ -6,14 +6,14 @@ from typing import Union, Dict
 from pydantic import BaseModel
 
 
-class Covi_Tracker(BaseModel):
-    breathing_problem: bool
-    fever: bool
-    dry_cough: bool
-    sore_throat: bool
-    abroad_travel: bool
-    contact_with_covid_patient: bool
-    attended_large_gathering: bool
+class Covi_Checker(BaseModel):
+    breathing_problem: Union[int, bool]
+    fever: Union[int, bool]
+    dry_cough: Union[int, bool]
+    sore_throat: Union[int, bool]
+    abroad_travel: Union[int, bool]
+    contact_with_covid_patient: Union[int, bool]
+    attended_large_gathering: Union[int, bool]
 
 
 with open(pathlib.Path(__file__).parent/'model'/'checker.pkl', 'rb') as file:
@@ -21,7 +21,7 @@ with open(pathlib.Path(__file__).parent/'model'/'checker.pkl', 'rb') as file:
     model: LogisticRegression = pickle.load(file)
 
 
-def format_mapper(input: Covi_Tracker) -> dict:
+def format_mapper(input: Covi_Checker) -> dict:
     return {
         'Breathing Problem' : [int(input.breathing_problem)],
         'Fever' : [int(input.fever)],
@@ -33,9 +33,9 @@ def format_mapper(input: Covi_Tracker) -> dict:
     }
 
 
-def predict(data: Union[Dict, Covi_Tracker]) -> float:
+def predict(data: Union[Dict, Covi_Checker]) -> float:
     '''Predicts the chance of being covid positive'''
-    if isinstance(data, Covi_Tracker): data: dict = format_mapper(data)
+    if isinstance(data, Covi_Checker): data: dict = format_mapper(data)
     data: pd.DataFrame = pd.DataFrame.from_dict(data)
     return model.predict_proba(data)[0][1]
 
@@ -43,13 +43,8 @@ def predict(data: Union[Dict, Covi_Tracker]) -> float:
 # DEBUG
 
 if __name__=='__main__':
-    test_data = {
-        'Breathing Problem' : [1],
-        'Fever' : [0],
-        'Dry Cough' : [0], 
-        'Sore throat' : [1],
-        'Abroad travel' : [1], 
-        'Contact with COVID Patient' : [1],
-        'Attended Large Gathering' : [0]
-    }
+    test_data = format_mapper(Covi_Checker(
+        breathing_problem=False, fever=True, dry_cough=True, sore_throat=False, abroad_travel=True,
+        contact_with_covid_patient=False, attended_large_gathering=False
+    ))
     print("Your COVID-19 prabability is", predict(test_data)*100, "%")

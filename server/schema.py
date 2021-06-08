@@ -39,6 +39,7 @@ class Doctor(Base):
     fees = Column(Integer)
     assistant_contact_no = Column(Integer)
     website = Column(String)
+    chamber_city = Column(String)
 
 
 class Vendor(Base):
@@ -46,6 +47,7 @@ class Vendor(Base):
 
     user_id = Column(String, ForeignKey(User.user_id), primary_key=True)
     user_obj = relationship('User')
+    store_name = Column(String)
     country = Column(String)
     state = Column(String)
     district = Column(String)
@@ -56,13 +58,18 @@ class Vendor(Base):
     store_id = Column(String)
 
 
-class Vendor_Product(Base):
+class VendorProduct(Base):
     __tablename__ = "vendor_product_detail"
     
     product_id = Column(String, primary_key=True)
-    store_id = Column(String, ForeignKey('Vendor'))
+    store_id = Column(String, ForeignKey(Vendor.store_id))
+    vendor_obj = relationship('Vendor')
     store_name = Column(String)
     quantity = Column(Integer)
     price = Column(Integer)
     delivery_eta = Column(String)
     feedback = Column(String)
+
+
+class AppointmentListForUser(Base):
+    __tablename__ = "appointment_list_for_user"
