@@ -33,16 +33,13 @@ sender_email = str(Config.MAIL_ID)
 message = """\
 Subject: Confirmation Mail for Signing-Up in Health is Wealth
 
-<HTML>
-<BODY>
 This email account has been registered into our website.
 Is it you?!! or any other else.
 
 Confirm Your Signing-Up by activating your account.
 
-To activate your account please follow this link: %s
-</BODY>
-</HTML>
+To activate your account please follow this link:
+http://gcettbiaans22.herokuapp.com%s
 """
 
 # Create a secure SSL context
