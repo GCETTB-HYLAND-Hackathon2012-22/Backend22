@@ -71,5 +71,5 @@ class VendorProduct(Base):
     feedback = Column(String)
 
 
-class AppointmentListForUser(Base):
-    __tablename__ = "appointment_list_for_user"
+# class AppointmentListForUser(Base):
+#     __tablename__ = "appointment_list_for_user"

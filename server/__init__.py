@@ -5,7 +5,7 @@ from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from .router import router
 from .database import get_db, Session
-from . import security, crud, models, ml_helper
+from . import security, crud, models, ml_helper, dl_helper
 
 @router.get('/api', response_class=HTMLResponse)
 async def index(db: Session = Depends(get_db)):
@@ -58,7 +58,8 @@ async def predict_covid(symptoms: ml_helper.Covi_Checker):
 
 @router.post('/api/covi_checker/from_image')
 async def predict_covid_from_image(file: UploadFile = File(...)):
-    raise HTTPException(
-        status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-        detail='Not Implemented Yet'
-    )
+    # raise HTTPException(
+    #     status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+    #     detail='Not Implemented Yet'
+    # )
+    return {'result': dl_helper.class_list[await dl_helper.predict(file)]}
