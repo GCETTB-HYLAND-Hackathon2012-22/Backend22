@@ -7,9 +7,6 @@ from .router import router
 from .database import get_db, Session
 from . import security, crud, models, ml_helper
 
-# Test
-import tensorflow as tf
-
 @router.get('/api', response_class=HTMLResponse)
 async def index(db: Session = Depends(get_db)):
     '''For Debug Purpose Only'''

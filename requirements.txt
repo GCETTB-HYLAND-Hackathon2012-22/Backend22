@@ -22,6 +22,6 @@ passlib[bcrypt]
 # ML-INTEGRATION
 scikit-learn
 pandas
-# tensorflow
+tensorflow-cpu
 # Pillow
 # numpy
