@@ -23,5 +23,5 @@ passlib[bcrypt]
 scikit-learn
 pandas
 tensorflow-cpu
-# Pillow
-# numpy
+Pillow
+numpy

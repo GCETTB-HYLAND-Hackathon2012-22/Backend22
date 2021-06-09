@@ -21,7 +21,7 @@ async def load_image_from_file(file: UploadFile, target_size=None):
                 img = img.resize(width_height_tuple, resample=PIL_IMAGE.NEAREST)
     return TF_IMAGE.img_to_array(img)
 
-async def predict(file: UploadFile) -> int:
+async def predict(file: UploadFile) -> list:
     image = await load_image_from_file(file, target_size=(256,256))
     image = np.expand_dims(image, axis=0)
-    return model.predict(image).argmax(axis=-1)[0]
+    return list(model.predict(image).squeeze())
