@@ -6,7 +6,7 @@ from typing import Union, Dict
 from pydantic import BaseModel
 
 
-class Covi_Checker(BaseModel):
+class Medi_Checker(BaseModel):
     breathing_problem: Union[int, bool]
     fever: Union[int, bool]
     dry_cough: Union[int, bool]
@@ -21,7 +21,7 @@ with open(pathlib.Path(__file__).parent/'model'/'checker.pkl', 'rb') as file:
     model: LogisticRegression = pickle.load(file)
 
 
-def format_mapper(input: Covi_Checker) -> dict:
+def format_mapper(input: Medi_Checker) -> dict:
     return {
         'Breathing Problem' : [int(input.breathing_problem)],
         'Fever' : [int(input.fever)],
@@ -33,9 +33,9 @@ def format_mapper(input: Covi_Checker) -> dict:
     }
 
 
-def predict(data: Union[Dict, Covi_Checker]) -> float:
+def predict(data: Union[Dict, Medi_Checker]) -> float:
     '''Predicts the chance of being covid positive'''
-    if isinstance(data, Covi_Checker): data: dict = format_mapper(data)
+    if isinstance(data, Medi_Checker): data: dict = format_mapper(data)
     data: pd.DataFrame = pd.DataFrame.from_dict(data)
     return model.predict_proba(data)[0][1]
 
@@ -43,7 +43,7 @@ def predict(data: Union[Dict, Covi_Checker]) -> float:
 # DEBUG
 
 if __name__=='__main__':
-    test_data = format_mapper(Covi_Checker(
+    test_data = format_mapper(Medi_Checker(
         breathing_problem=False, fever=True, dry_cough=True, sore_throat=False, abroad_travel=True,
         contact_with_covid_patient=False, attended_large_gathering=False
     ))

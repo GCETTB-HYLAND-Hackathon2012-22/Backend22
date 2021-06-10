@@ -53,16 +53,12 @@ async def get_vendor_by_uid(uid: str, db: Session = Depends(get_db)):
 
 # MEDI-CHECKER
 
-@router.post('/api/covi_checker')
-async def predict_covid(symptoms: ml_helper.Covi_Checker):
-    return {'result': ml_helper.predict(symptoms)}
+@router.post('/api/medi_checker')
+async def predict_covid(symptoms: ml_helper.Medi_Checker):
+    return {'Covid': ml_helper.predict(symptoms)}
 
 
-@router.post('/api/covi_checker/from_image')
+@router.post('/api/medi_checker/from_xray')
 async def predict_covid_from_image(file: UploadFile = File(...)):
-    # raise HTTPException(
-    #     status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-    #     detail='Not Implemented Yet'
-    # )
     result = await dl_helper.predict(file)
     return {dl_helper.class_list[i]: float(result[i]) for i in range(len(dl_helper.class_list))}
