@@ -3,7 +3,7 @@ from fastapi import Depends, UploadFile, File, HTTPException, status
 from fastapi.responses import HTMLResponse
 from .router import router
 from .database import get_db, Session
-from . import security, crud, models, ml_helper, dl_helper
+from . import security, crud, models, ml_helper, dl_helper, geolocation
 
 @router.get('/api', response_class=HTMLResponse)
 async def index(db: Session = Depends(get_db)):
@@ -12,9 +12,9 @@ async def index(db: Session = Depends(get_db)):
 
 
 @router.get('/api/doctors', response_model=List[models.Doctor])
-async def get_doctors_list(db: Session = Depends(get_db), skip: int = None, limit: int = None):
-    '''Returns the list of all doctors in a paginated format'''
-    return crud.get_doctors(db, skip, limit)
+async def get_doctors_list(db: Session = Depends(get_db), lat: int=None, long: int=None):
+    '''Returns the list of all doctors'''
+    return sorted(crud.get_doctors(db), key=lambda loc: geolocation.distance_or_Inf(lat, long, None, None))
 
 
 @router.get('/api/doctor/{uid}', response_model=models.Doctor)
@@ -30,9 +30,9 @@ async def get_doctor_by_uid(uid: str, db: Session = Depends(get_db)):
 
 
 @router.get('/api/vendors', response_model=List[models.Vendor])
-async def get_vendors_list(db: Session = Depends(get_db), skip: int = None, limit: int = None):
+async def get_vendors_list(db: Session = Depends(get_db), lat: int=None, long: int=None):
     '''Returns the list of all vendors in a paginated format'''
-    return crud.get_vendors(db, skip, limit)
+    return sorted(crud.get_vendors(db), key=lambda loc: geolocation.distance_or_Inf(lat, long, None, None))
 
 
 @router.get('/api/vendor/{uid}', response_model=models.Vendor)

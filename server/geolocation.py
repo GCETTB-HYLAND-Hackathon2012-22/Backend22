@@ -1,6 +1,6 @@
 # Resource -> https://www.geeksforgeeks.org/program-distance-two-points-earth/
 
-from math import radians, cos, sin, asin, sqrt
+from math import radians, cos, sin, asin, sqrt, inf
 
 def distance(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
     '''Calculates approx. distance ( in K.M ) between 2 places on the Earth based on Latitude and Longitude'''
@@ -22,6 +22,12 @@ def distance(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
 
     # Calculate the result
     return (c * r)
+
+
+def distance_or_Inf(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
+    if lat1 is None or lat1 is None or lat1 is None or lat1 is None:
+        return inf
+    return distance(lat1, lon1, lat2, lon2)
 
 
 # DEBUG

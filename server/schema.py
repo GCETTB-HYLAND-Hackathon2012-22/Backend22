@@ -71,5 +71,47 @@ class VendorProduct(Base):
     feedback = Column(String)
 
 
-# class AppointmentListForUser(Base):
-#     __tablename__ = "appointment_list_for_user"
+class Ambulance(Base):
+    __tablename__ = "ambulance_db"
+
+    store_id = Column(String, primary_key=True)
+    org_name = Column(String)
+    contact_no = Column(Integer)
+    car_no = Column(Integer)
+
+
+class AppointmentListForUser(Base):
+    __tablename__ = "appointment_list_for_user"
+
+    doc_user_id = Column(String, ForeignKey(Doctor.user_id), primary_key=True)
+    doc_obj = relationship('Doctor')
+    appoinment_day = Column(Date)
+    time = Column(Time)
+    fees = Column(Integer)
+    first_name = Column(String)
+    last_name = Column(String)
+    chamber_city = Column(String)
+    doc_contact = Column(Integer, ForeignKey(Doctor.assistant_contact_no))
+
+
+class UserMedicine(Base):
+    __tablename__ = "user_medicine_db"
+
+    user_id = Column(String, primary_key=True)
+    store_id = Column(String, ForeignKey(VendorProduct.store_id))
+    product_id = Column(String, ForeignKey(VendorProduct.product_id))
+    product_obj = relationship('VendorProduct')
+    date_of_purchase = Column(Date)
+    bill_id = Column(String)
+
+
+class UserOxygen(Base):
+    __tablename__ = "user_oxygen_db"
+
+    user_id = Column(String, primary_key=True)
+    store_id = Column(String, ForeignKey(VendorProduct.store_id))
+    product_id = Column(String, ForeignKey(VendorProduct.product_id))
+    product_obj = relationship('VendorProduct')
+    price = Column(Integer)
+    date_of_delivery = Column(Date)
+    quantity = Column(Integer)

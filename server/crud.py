@@ -43,14 +43,14 @@ def get_doctor(db: Session, uid: str) -> schema.Doctor:
 
 def get_doctors(db: Session, skip=0, limit=100) -> List[schema.Doctor]:
     '''Returns the list of all Doctors in paginated format'''
-    return db.query(schema.Doctor).offset(skip).limit(limit).all()
+    return db.query(schema.Doctor).all()
 
 
 def get_vendor(db: Session, uid: str) -> schema.Vendor:
     '''Returns Vendors Details identified by uid'''
     return db.query(schema.Vendor).filter(schema.Vendor.user_id == uid).first()
 
-def get_vendors(db: Session, skip=0, limit=100) -> List[schema.Vendor]:
-    '''Returns the list of all Vendors in paginated format'''
-    return db.query(schema.Vendor).offset(skip).limit(limit).all()
+def get_vendors(db: Session) -> List[schema.Vendor]:
+    '''Returns the list of all Vendors'''
+    return db.query(schema.Vendor).all()
 
