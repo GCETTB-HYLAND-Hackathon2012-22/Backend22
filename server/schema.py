@@ -2,7 +2,7 @@
 
 from sqlalchemy.orm import relationship
 from .database import Base
-from sqlalchemy import Column, String, Date, Integer, BigInteger, Boolean, ForeignKey, Time
+from sqlalchemy import Column, String, Date, Integer, BigInteger, Boolean, ForeignKey, Time, Numeric
 
 class User(Base):
     __tablename__ = "user_login_detail_general"
@@ -17,6 +17,8 @@ class User(Base):
     dob = Column(Date)
     pin = Column(Integer)
     contact_no = Column(BigInteger)
+    latitude = Column(Numeric)
+    longitude = Column(Numeric)
 
 class Admin(Base):
     __tablename__ = "admin_login_detail"
@@ -37,7 +39,7 @@ class Doctor(Base):
     specialization = Column(String)
     visiting_hr = Column(Time)
     fees = Column(Integer)
-    assistant_contact_no = Column(Integer)
+    assistant_contact_no = Column(BigInteger)
     website = Column(String)
     chamber_city = Column(String)
 
@@ -52,9 +54,9 @@ class Vendor(Base):
     state = Column(String)
     district = Column(String)
     city_or_village_name = Column(String)
-    store_contact_no = Column(Integer)
+    store_contact_no = Column(BigInteger)
     wp_no = Column(Integer)
-    delivery_capacity = Column(Integer)
+    delivery_capacity = Column(BigInteger)
     store_id = Column(String)
 
 
@@ -91,14 +93,14 @@ class AppointmentListForUser(Base):
     first_name = Column(String)
     last_name = Column(String)
     chamber_city = Column(String)
-    doc_contact = Column(Integer, ForeignKey(Doctor.assistant_contact_no))
+    doc_contact = Column(BigInteger)
 
 
 class UserMedicine(Base):
     __tablename__ = "user_medicine_db"
 
     user_id = Column(String, primary_key=True)
-    store_id = Column(String, ForeignKey(VendorProduct.store_id))
+    store_id = Column(String)
     product_id = Column(String, ForeignKey(VendorProduct.product_id))
     product_obj = relationship('VendorProduct')
     date_of_purchase = Column(Date)
@@ -109,7 +111,7 @@ class UserOxygen(Base):
     __tablename__ = "user_oxygen_db"
 
     user_id = Column(String, primary_key=True)
-    store_id = Column(String, ForeignKey(VendorProduct.store_id))
+    store_id = Column(String)
     product_id = Column(String, ForeignKey(VendorProduct.product_id))
     product_obj = relationship('VendorProduct')
     price = Column(Integer)
