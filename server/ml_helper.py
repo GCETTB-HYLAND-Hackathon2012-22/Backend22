@@ -7,13 +7,13 @@ from pydantic import BaseModel
 
 
 class Medi_Checker(BaseModel):
-    breathing_problem: Union[int, bool]
-    fever: Union[int, bool]
-    dry_cough: Union[int, bool]
-    sore_throat: Union[int, bool]
-    abroad_travel: Union[int, bool]
-    contact_with_covid_patient: Union[int, bool]
-    attended_large_gathering: Union[int, bool]
+    breathing_problem: Union[int, bool] = 0
+    fever: Union[int, bool] = 0
+    dry_cough: Union[int, bool] = 0
+    sore_throat: Union[int, bool] = 0
+    abroad_travel: Union[int, bool] = 0
+    contact_with_covid_patient: Union[int, bool] = 0
+    attended_large_gathering: Union[int, bool] = 0
 
 
 with open(pathlib.Path(__file__).parent/'model'/'checker.pkl', 'rb') as file:

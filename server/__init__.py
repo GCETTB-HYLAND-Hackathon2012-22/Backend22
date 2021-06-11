@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Union, Optional
 from fastapi import Depends, UploadFile, File, HTTPException, status
 from fastapi.responses import HTMLResponse
 from .router import router
@@ -97,3 +97,44 @@ async def predict_health(symptoms: ml_helper.Medi_Checker):
 async def predict_health_from_image(file: UploadFile = File(...)):
     result = await dl_helper.predict(file)
     return {dl_helper.class_list[i]: float(result[i]) for i in range(len(dl_helper.class_list)) if dl_helper.class_list[i] not in dl_helper.ext_class}
+
+
+# Get Max Oxygen that can be Requested by User
+
+@router.post('/api/oxygen/max')
+async def get_max_oxygen(                  
+                            age: int = 0,
+                            gender: int = 3,
+                            asthma: Union[bool, int] = 0,
+                            pneumonia: Union[bool, int] = 0,
+                            other_lung_disease: Union[bool, int] = 0,
+                            breathing_difficulty: Union[bool, int] = 0,
+                            fever: Union[bool, int] = 0,
+                            cough: Union[bool, int] = 0,
+                            sore_throat: Union[bool, int] = 0,
+                            chest_pain: Union[bool, int] = 0,
+                            contact_with_covid_patient: Union[bool, int] = 0,
+                            travel_history: Union[bool, int] = 0,
+                            attended_large_gathering: Union[bool, int] = 0,
+    ):
+
+    pred = ml_helper.predict(ml_helper.Medi_Checker(**{
+        'breathing_problem': breathing_difficulty,
+        'fever': fever,
+        'dry_cough': cough,
+        'sore_throat': sore_throat,
+        'abroad_travel': travel_history,
+        'contact_with_covid_patient': contact_with_covid_patient,
+        'attended_large_gathering': attended_large_gathering
+    }))
+
+    if pred >= 0.75:
+        max_limit = 9999;
+    elif pred >= 0.55:
+        max_limit = 99
+    elif pred > 0.40:
+        max_limit = 75
+    else:
+        max_limit = 50
+
+    return {'max_limit': max_limit}
