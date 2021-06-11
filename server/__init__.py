@@ -3,7 +3,7 @@ from fastapi import Depends, UploadFile, File, HTTPException, status
 from fastapi.responses import HTMLResponse
 from .router import router
 from .database import get_db, Session
-from . import security, crud, models, ml_helper, dl_helper, geolocation
+from . import security, crud, models, ml_helper, dl_helper, geolocation, chatbot_helper
 
 @router.get('/api', response_class=HTMLResponse)
 async def index(db: Session = Depends(get_db)):
@@ -77,6 +77,13 @@ async def book_oxygen(item: models.UserOxygenBase, db: Session = Depends(get_db)
 @router.post('/api/order/medicine', response_model=models.UserMedicine)
 async def book_medicine(item: models.UserMedicineBase, db: Session = Depends(get_db)):
     return crud.book_medicine(item, db)
+
+
+# Chat-bot
+
+@router.post('/api/chatbot')
+async def get_chatbot_reply(question: str):
+    return {'reply': chatbot_helper.robot(question)}
 
 
 # MEDI-CHECKER

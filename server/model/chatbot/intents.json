@@ -1,0 +1,135 @@
+{"intents": [
+  {
+    "tag": "greetings",
+    "patterns":[
+      "hello",
+      "hey",
+      "hi",
+      "good day",
+      "Greetings",
+      "What's up?",
+      "hos is it going?"
+    ],
+    "responses": [
+      "Hello",
+      "Hey!",
+      "What can I do for you?"
+    ]
+  },
+  {
+    "tag": "goodbye",
+    "patterns": [
+      "cya",
+      "See you later",
+      "Goodbye",
+      "I'm leaving",
+      "Have a good day",
+      "bye",
+      "see ya"
+    ],
+    "responses": [
+      "Sad to see you go :(",
+      "Talk to you later",
+      "Goodbye!"
+    ]
+  },
+  {
+    "tag": "doctor",
+    "patterns": [
+      "I want to check up!",
+      "how I take appointment for a doctor",
+      "I want to see the doctors list",
+      "I want doctors consultation",
+      "How can I consult with a doctor"
+    ],
+    "responses": [
+      "Go to our \"Services\" section then go to \"Appointment\"",
+      "Click Here : https://soumyajitnandi.000webhostapp.com/pages/appointment.html  \n to reach our specialists"
+    ]
+  },
+  {
+    "tag": "predictions",
+    "patterns": [
+      "I want to check my health condition",
+      "I have some symptoms and I want to know what is happened with me",
+      "can I know my diseases from symptoms"
+    ],
+    "responses": [
+      "Go to our \"Services\" section then go to \"Predictor\"",
+      "Click Here : https://soumyajitnandi.000webhostapp.com/pages/test.php?  \n and make a self check up"
+    ]
+  },
+  {
+    "tag": "oxygen",
+    "patterns": [
+      "Urgent need Oxygen",
+      "from where I can buy Oxygen",
+      "want to order oxygen",
+      "want to know oxygen price"
+    ],
+    "responses": [
+      "Go to our \"Services\" section then go to \"Oxygen\"",
+      "Click Here : https://soumyajitnandi.000webhostapp.com/pages/oxygen.html  \n and find details about oxygen suppliers and you can also order from them"
+    ]
+  },
+  {
+    "tag": "Vaccination",
+    "patterns": [
+      "I want to book slot for vaccinations",
+      "check availability for vaccination slot",
+      "Check date for Vaccinations",
+      "want to know details and locations about vaccination centre",
+      "want to know the pricing about Vaccination"
+    ],
+    "responses": [
+      "Go to our \"Services\" section then go to \"Vaccination\"",
+      "Click Here : https://soumyajitnandi.000webhostapp.com/pages/vaccine.html  \n and find details about Vaccination centres and book your slot for vaccination"
+    ]
+  },
+  {
+    "tag": "Medicine",
+    "patterns": [
+      "want to buy medicine",
+      "Medicine shop near me",
+      "online medical shop",
+      "urgent need some medicine, what to do?",
+      "From where I can get medicine"
+    ],
+    "responses": [
+      "Go to our \"Services\" section then go to \"Medicine\"",
+      "Click Here : https://soumyajitnandi.000webhostapp.com/pages/medicine.html  \n and find details about shops and you can also order from there and it's free for delivery  "
+    ]
+  },
+  {
+    "tag": "Ambulance",
+    "patterns": [
+      "Urgent need Ambulance",
+      "from where I can borrow Ambulance",
+      "need to transfer a Patient",
+      "Ambulance Provider",
+      "Need help to arrange ambulance",
+      "Ambulance details about fare"
+    ],
+    "responses": [
+      "Go to our \"Services\" section then go to \"Ambulance\"",
+      "Click Here : https://soumyajitnandi.000webhostapp.com/pages/ambulance.html  \n and find details about oxygen suppliers and you can also order from them"
+    ]
+  },
+  {
+    "tag": "Contact",
+    "patterns": [
+      "How Can I contact U",
+      "I need to talk to management"
+    ],
+    "responses": ["Click here: https://soumyajitnandi.000webhostapp.com/pages/contact.html to contact us."]
+  },
+  {
+    "tag": "Social",
+    "patterns": [
+      "Social site",
+      "Facebook page link",
+      "twitter page"
+    ],
+    "responses": ["Click here: https://soumyajitnandi.000webhostapp.com/pages/social.html to reach our social sites."]
+  }
+]}

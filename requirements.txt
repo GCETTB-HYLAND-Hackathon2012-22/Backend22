@@ -25,3 +25,5 @@ pandas
 tensorflow-cpu
 Pillow
 numpy
+
+nltk
