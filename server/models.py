@@ -92,9 +92,8 @@ class UserMedicineBase(BaseModel):
     user_id: str
     store_id: str
     product_id: str
-    price: int
-    date_of_delivery: date
-    quantity: int
+    date_of_purchase: date
+    bill_id: str
 
 class UserMedicine(UserMedicineBase):
     product_obj: VendorProduct

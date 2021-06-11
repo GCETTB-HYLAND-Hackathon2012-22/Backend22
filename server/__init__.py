@@ -75,7 +75,7 @@ async def book_oxygen(item: models.UserOxygenBase, db: Session = Depends(get_db)
 
 
 @router.post('/api/order/medicine', response_model=models.UserMedicine)
-async def book_oxygen(item: models.UserMedicineBase, db: Session = Depends(get_db)):
+async def book_medicine(item: models.UserMedicineBase, db: Session = Depends(get_db)):
     return crud.book_medicine(item, db)
 
 
