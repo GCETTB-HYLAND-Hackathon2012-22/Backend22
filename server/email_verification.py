@@ -22,11 +22,11 @@ def generate_confirmation_token(email: str) -> str:
     '''Generate New Verification Token'''
     return jwt.encode({"sub": email}, SECRET_KEY, algorithm=ALGORITHM)
 
-def confirm_token(token: str) -> Union[str, None]:
+def confirm_token(token: str, error) -> Union[str, None]:
     try:
         return jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM]).get("sub")
     except JWTError:
-        raise None
+        raise error
 
 
 ##########################################################
@@ -67,7 +67,7 @@ async def confirm_token_endpoint(token: str, db: Session = Depends(get_db)):
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Invalid Url"
         )
-    email = confirm_token(token)
+    email = confirm_token(token, error)
     if not email:
         raise error
     
