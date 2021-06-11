@@ -54,3 +54,6 @@ def get_vendors(db: Session) -> List[schema.Vendor]:
     '''Returns the list of all Vendors'''
     return db.query(schema.Vendor).all()
 
+def get_oxygen(db: Session) -> List[schema.VendorProduct]:
+    '''Returns the list of all Oxygen as Products'''
+    return db.query(schema.VendorProduct).filter(schema.VendorProduct.is_oxygen == True).all()

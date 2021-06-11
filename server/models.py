@@ -69,6 +69,7 @@ class VendorProduct(BaseModel):
     price: int
     delivery_eta: str
     feedback: str
+    is_oxygen: bool
 
     class Config:
         orm_mode = True

@@ -24,7 +24,7 @@ class Admin(Base):
     __tablename__ = "admin_login_detail"
 
     user_id = Column(String, ForeignKey(User.user_id), primary_key=True)
-    user_obj = relationship('User')
+    user_obj: User = relationship('User')
     workspace = Column(String)
     designation = Column(String)
     experience = Column(Integer)
@@ -35,7 +35,7 @@ class Doctor(Base):
     __tablename__ = "doctor_db"
 
     user_id = Column(String, ForeignKey(User.user_id), primary_key=True)
-    user_obj = relationship('User')
+    user_obj: User = relationship('User')
     specialization = Column(String)
     visiting_hr = Column(Time)
     fees = Column(Integer)
@@ -48,7 +48,7 @@ class Vendor(Base):
     __tablename__ = "vendor_db"
 
     user_id = Column(String, ForeignKey(User.user_id), primary_key=True)
-    user_obj = relationship('User')
+    user_obj: User = relationship('User')
     store_name = Column(String)
     country = Column(String)
     state = Column(String)
@@ -65,12 +65,13 @@ class VendorProduct(Base):
     
     product_id = Column(String, primary_key=True)
     store_id = Column(String, ForeignKey(Vendor.store_id))
-    vendor_obj = relationship('Vendor')
+    vendor_obj: Vendor = relationship('Vendor')
     store_name = Column(String)
     quantity = Column(Integer)
     price = Column(Integer)
     delivery_eta = Column(String)
     feedback = Column(String)
+    is_oxygen = Column(Boolean)
 
 
 class Ambulance(Base):
@@ -86,7 +87,7 @@ class AppointmentListForUser(Base):
     __tablename__ = "appointment_list_for_user"
 
     doc_user_id = Column(String, ForeignKey(Doctor.user_id), primary_key=True)
-    doc_obj = relationship('Doctor')
+    doc_obj: Doctor = relationship('Doctor')
     appoinment_day = Column(Date)
     time = Column(Time)
     fees = Column(Integer)
@@ -102,7 +103,7 @@ class UserMedicine(Base):
     user_id = Column(String, primary_key=True)
     store_id = Column(String)
     product_id = Column(String, ForeignKey(VendorProduct.product_id))
-    product_obj = relationship('VendorProduct')
+    product_obj: VendorProduct = relationship('VendorProduct')
     date_of_purchase = Column(Date)
     bill_id = Column(String)
 
@@ -113,7 +114,7 @@ class UserOxygen(Base):
     user_id = Column(String, primary_key=True)
     store_id = Column(String)
     product_id = Column(String, ForeignKey(VendorProduct.product_id))
-    product_obj = relationship('VendorProduct')
+    product_obj: VendorProduct = relationship('VendorProduct')
     price = Column(Integer)
     date_of_delivery = Column(Date)
     quantity = Column(Integer)

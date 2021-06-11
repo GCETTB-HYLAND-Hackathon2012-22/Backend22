@@ -15,7 +15,7 @@ async def index(db: Session = Depends(get_db)):
 async def get_doctors_list(db: Session = Depends(get_db), lat: int=None, long: int=None):
     '''Returns the list of all doctors'''
     return sorted(crud.get_doctors(db),
-        key=lambda loc: geolocation.distance_or_Inf(lat, long, loc.user_obj.latitude, loc.user_obj.longitude)
+        key=lambda x: geolocation.distance_or_Inf(lat, long, x.user_obj.latitude, x.user_obj.longitude)
     )
 
 
@@ -35,9 +35,8 @@ async def get_doctor_by_uid(uid: str, db: Session = Depends(get_db)):
 async def get_vendors_list(db: Session = Depends(get_db), lat: int=None, long: int=None):
     '''Returns the list of all vendors in a paginated format'''
     return sorted(crud.get_vendors(db),
-        key=lambda loc: geolocation.distance_or_Inf(lat, long, loc.user_obj.latitude, loc.user_obj.longitude)
+        key=lambda x: geolocation.distance_or_Inf(lat, long, x.user_obj.latitude, x.user_obj.longitude)
     )
-
 
 @router.get('/api/vendor/{uid}', response_model=models.Vendor)
 async def get_vendor_by_uid(uid: str, db: Session = Depends(get_db)):
@@ -49,6 +48,13 @@ async def get_vendor_by_uid(uid: str, db: Session = Depends(get_db)):
             detail='No vendor found with given uid'
         )
     return res
+
+
+@router.get('/api/oxygen', response_model=List[models.VendorProduct])
+async def get_oxygen_list(db: Session = Depends(get_db), lat: int=None, long: int=None):
+    return sorted(crud.get_oxygen(db),
+        key=lambda x: geolocation.distance_or_Inf(lat, long, x.vendor_obj.user_obj.latitude, x.vendor_obj.longitude)
+    )
 
 
 # MEDI-CHECKER
