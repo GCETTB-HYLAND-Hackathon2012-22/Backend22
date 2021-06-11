@@ -14,6 +14,8 @@ class UserBase(BaseModel):
 
 class UserCreate(UserBase):
     password: str
+    latitude: float = None
+    longitude: float = None
 
 class User(UserBase):
     is_active: bool
@@ -54,6 +56,19 @@ class Vendor(BaseModel):
     store_contact_no: int
     wp_no: int
     delivery_capacity: int
+
+    class Config:
+        orm_mode = True
+
+class VendorProduct(BaseModel):
+    product_id: str
+    store_id: str
+    vendor_obj: Vendor
+    store_name: str
+    quantity: int
+    price: int
+    delivery_eta: str
+    feedback: str
 
     class Config:
         orm_mode = True
