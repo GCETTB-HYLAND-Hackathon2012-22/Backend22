@@ -96,6 +96,7 @@ class AppointmentListForUser(Base):
     last_name = Column(String)
     chamber_city = Column(String)
     doc_contact = Column(BigInteger)
+    problem = Column(String)
 
 
 class UserMedicine(Base):

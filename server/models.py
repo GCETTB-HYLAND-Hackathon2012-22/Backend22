@@ -82,6 +82,7 @@ class AppointmentListForUser(BaseModel):
     last_name: str
     chamber_city: str
     doc_contact: int
+    problem: str
 
     class Config:
         orm_mode = True
