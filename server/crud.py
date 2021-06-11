@@ -79,10 +79,19 @@ def book_oxygen(item: models.UserOxygenBase, db: Session) -> schema.UserOxygen:
     db.refresh(item)
     return item
 
+def get_booked_oxygen(db: Session, uid: str) -> schema.UserOxygen:
+    '''Get Booked Oxygen Details by UID'''
+    return db.query(schema.UserOxygen).filter(schema.UserOxygen.user_id == uid).all()
+
+
 def book_medicine(item: models.UserMedicineBase, db: Session) -> schema.UserMedicine:
-    '''Adds Order for Oxygen'''
+    '''Adds Order for Medicine'''
     item = schema.UserMedicine(**item.dict())
     db.add(item)
     db.commit()
     db.refresh(item)
     return item
+
+def get_booked_medicine(db: Session, uid: str) -> schema.UserMedicine:
+    '''Get Booked Medicine Details by UID'''
+    return db.query(schema.UserMedicine).filter(schema.UserMedicine.user_id == uid).all()

@@ -1,8 +1,7 @@
 # Handles Login
 
-from server import models
-from typing import Literal, Union
-from . import crud, schema, email_verification
+from typing import Literal, Union, List
+from . import crud, schema, email_verification, models
 from .environ import Config
 from .database import get_db
 from .router import router
@@ -155,3 +154,15 @@ async def read_users_me(db: Session = Depends(get_db), current_user: schema.User
             headers={'WWW-Authenticate': 'Bearer'},
         )
     return admin;
+
+
+@router.get("/api/users/me/oxygen", response_model=List[models.UserOxygen])
+async def read_users_me(current_user: schema.User = Depends(get_current_active_user), db: Session = Depends(get_db)):
+    '''Returns current logged-in user's oxygen booked details'''
+    return crud.get_booked_oxygen(db, current_user.user_id)
+
+
+@router.get("/api/users/me/medicine", response_model=List[models.UserMedicine])
+async def read_users_me(current_user: schema.User = Depends(get_current_active_user), db: Session = Depends(get_db)):
+    '''Returns current logged-in user's medicine booked details'''
+    return crud.get_booked_medicine(db, current_user.user_id)
