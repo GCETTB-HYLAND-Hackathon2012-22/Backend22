@@ -74,4 +74,4 @@ async def predict_health(symptoms: ml_helper.Medi_Checker):
 @router.post('/api/medi_checker/from_xray')
 async def predict_health_from_image(file: UploadFile = File(...)):
     result = await dl_helper.predict(file)
-    return {dl_helper.class_list[i]: float(result[i]) for i in range(len(dl_helper.class_list))}
+    return {dl_helper.class_list[i]: float(result[i]) for i in range(len(dl_helper.class_list)) if dl_helper.class_list[i] not in dl_helper.ext_class}

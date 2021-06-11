@@ -10,6 +10,8 @@ import io
 model: models.Model = models.load_model(pathlib.Path(__file__).parent/'model'/'X-ray_Checker.h5')
 class_list = ["BacterialPneumonia", "Covid", "Normal", "ViralPneumonia"]
 
+ext_class = ["Normal"]
+
 async def load_image_from_file(file: UploadFile, target_size=None):
     f = await file.read()
     img = PIL_IMAGE.open(io.BytesIO(f))
