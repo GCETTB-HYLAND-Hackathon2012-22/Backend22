@@ -70,6 +70,7 @@ class VendorProduct(BaseModel):
     delivery_eta: str
     feedback: str
     is_oxygen: bool
+    is_medicine: bool
 
     class Config:
         orm_mode = True

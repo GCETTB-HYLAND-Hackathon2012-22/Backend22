@@ -57,6 +57,13 @@ async def get_oxygen_list(db: Session = Depends(get_db), lat: int=None, long: in
     )
 
 
+@router.get('/api/medicine', response_model=List[models.VendorProduct])
+async def get_oxygen_list(db: Session = Depends(get_db), lat: int=None, long: int=None):
+    return sorted(crud.get_medicine(db),
+        key=lambda x: geolocation.distance_or_Inf(lat, long, x.vendor_obj.user_obj.latitude, x.vendor_obj.longitude)
+    )
+
+
 # MEDI-CHECKER
 
 @router.post('/api/medi_checker')

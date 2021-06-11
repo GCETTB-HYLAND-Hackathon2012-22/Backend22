@@ -72,6 +72,7 @@ class VendorProduct(Base):
     delivery_eta = Column(String)
     feedback = Column(String)
     is_oxygen = Column(Boolean)
+    is_medicine = Column(Boolean)
 
 
 class Ambulance(Base):
