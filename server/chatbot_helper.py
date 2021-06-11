@@ -60,9 +60,9 @@ def get_response(intents_list, intents_json):
     return "Sorry , I can't understand You"
 
 
-def robot(input: str) -> str:
+def robot(msg: str) -> str:
     """Input Question and Get Reply as Output"""
-    ints = predict_class(input)
+    ints = predict_class(msg)
     return str(get_response(ints, intents))
 
 
