@@ -69,8 +69,19 @@ class VendorProduct(BaseModel):
     price: int
     delivery_eta: str
     feedback: str
-    is_oxygen: bool
-    is_medicine: bool
+
+    class Config:
+        orm_mode = True
+
+class AppointmentListForUser(BaseModel):
+    doc_user_id: str
+    appoinment_day: date
+    time: time
+    fees: int
+    first_name: str
+    last_name: str
+    chamber_city: str
+    doc_contact: int
 
     class Config:
         orm_mode = True

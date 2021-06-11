@@ -64,6 +64,11 @@ async def get_medicine_list(db: Session = Depends(get_db), lat: int=None, long: 
     )
 
 
+@router.post('/api/appointment', response_model=models.AppointmentListForUser)
+async def set_appointment(appointment: models.AppointmentListForUser, db: Session = Depends(get_db)):
+    return crud.set_appointment(db, appointment)
+
+
 # MEDI-CHECKER
 
 @router.post('/api/medi_checker')

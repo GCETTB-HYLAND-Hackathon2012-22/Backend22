@@ -41,8 +41,8 @@ def get_doctor(db: Session, uid: str) -> schema.Doctor:
     '''Returns Doctors Details identified by uid'''
     return db.query(schema.Doctor).filter(schema.Doctor.user_id == uid).first()
 
-def get_doctors(db: Session, skip=0, limit=100) -> List[schema.Doctor]:
-    '''Returns the list of all Doctors in paginated format'''
+def get_doctors(db: Session) -> List[schema.Doctor]:
+    '''Returns the list of all Doctors'''
     return db.query(schema.Doctor).all()
 
 
@@ -61,3 +61,11 @@ def get_oxygen(db: Session) -> List[schema.VendorProduct]:
 def get_medicine(db: Session) -> List[schema.VendorProduct]:
     '''Returns the list of all Oxygen as Products'''
     return db.query(schema.VendorProduct).filter(schema.VendorProduct.is_medicine == True).all()
+
+
+def set_appointment(db: Session, appointment: models.AppointmentListForUser) -> schema.AppointmentListForUser:
+    '''Fixes Appointment as set by user'''
+    db.add(appointment)
+    db.commit()
+    db.refresh(appointment)
+    return appointment
