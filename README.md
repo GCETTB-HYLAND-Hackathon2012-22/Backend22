@@ -51,9 +51,8 @@ Unlicensed
 
 
 ## Authors
-
-- [Aritra Mondal](@Aritra-Mondal)
 - [Apratim Sarkar](@axen46)
+- [Aritra Mondal](@Aritra-Mondal)
 - [Arpan Mahanty](@Edumate696)
 - [Raktim Das](@raktimdas2238)
 - [Soumyajit Nandi](@soumyajitnandi1)
