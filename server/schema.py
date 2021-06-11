@@ -121,3 +121,4 @@ class UserOxygen(Base):
     price = Column(Integer)
     date_of_delivery = Column(Date)
     quantity = Column(Integer)
+    address = Column(String)

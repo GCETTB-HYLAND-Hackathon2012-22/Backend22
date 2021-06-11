@@ -109,6 +109,7 @@ class UserOxygenBase(BaseModel):
     price: int
     date_of_delivery: date
     quantity: int
+    address: str
 
 class UserOxygen(UserOxygenBase):
     product_obj: VendorProduct
