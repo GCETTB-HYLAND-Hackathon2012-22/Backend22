@@ -1,5 +1,6 @@
 # Objects representing actual Relations in the Database
 
+from typing import List
 from sqlalchemy.orm import relationship
 from .database import Base
 from sqlalchemy import Column, String, Date, Integer, BigInteger, Boolean, ForeignKey, Time, Numeric
@@ -69,7 +70,7 @@ class VendorProduct(Base):
     store_name = Column(String)
     quantity = Column(Integer)
     price = Column(Integer)
-    delivery_eta = Column(String)
+    delivery_eta = Column(Date)
     feedback = Column(String)
     is_oxygen = Column(Boolean)
     is_medicine = Column(Boolean)

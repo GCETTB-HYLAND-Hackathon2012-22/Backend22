@@ -53,20 +53,30 @@ async def get_vendor_by_uid(uid: str, db: Session = Depends(get_db)):
 @router.get('/api/oxygen', response_model=List[models.VendorProduct])
 async def get_oxygen_list(db: Session = Depends(get_db), lat: int=None, long: int=None):
     return sorted(crud.get_oxygen(db),
-        key=lambda x: geolocation.distance_or_Inf(lat, long, x.vendor_obj.user_obj.latitude, x.vendor_obj.longitude)
+        key=lambda x: geolocation.distance_or_Inf(lat, long, x.vendor_obj.user_obj.latitude, x.vendor_obj.user_obj.longitude)
     )
 
 
 @router.get('/api/medicine', response_model=List[models.VendorProduct])
 async def get_medicine_list(db: Session = Depends(get_db), lat: int=None, long: int=None):
     return sorted(crud.get_medicine(db),
-        key=lambda x: geolocation.distance_or_Inf(lat, long, x.vendor_obj.user_obj.latitude, x.vendor_obj.longitude)
+        key=lambda x: geolocation.distance_or_Inf(lat, long, x.vendor_obj.user_obj.latitude, x.vendor_obj.user_obj.longitude)
     )
 
 
 @router.post('/api/appointment', response_model=models.AppointmentListForUser)
 async def set_appointment(appointment: models.AppointmentListForUser, db: Session = Depends(get_db)):
     return crud.set_appointment(db, appointment)
+
+
+@router.post('/api/order/oxygen', response_model=models.UserOxygen)
+async def book_oxygen(item: models.UserOxygenBase, db: Session = Depends(get_db)):
+    return crud.book_oxygen(item, db)
+
+
+@router.post('/api/order/medicine', response_model=models.UserMedicine)
+async def book_oxygen(item: models.UserMedicineBase, db: Session = Depends(get_db)):
+    return crud.book_medicine(item, db)
 
 
 # MEDI-CHECKER

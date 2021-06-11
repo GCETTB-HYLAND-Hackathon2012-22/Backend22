@@ -67,7 +67,7 @@ class VendorProduct(BaseModel):
     store_name: str
     quantity: int
     price: int
-    delivery_eta: str
+    delivery_eta: date
     feedback: str
 
     class Config:
@@ -83,6 +83,36 @@ class AppointmentListForUser(BaseModel):
     chamber_city: str
     doc_contact: int
     problem: str
+
+    class Config:
+        orm_mode = True
+
+
+class UserMedicineBase(BaseModel):
+    user_id: str
+    store_id: str
+    product_id: str
+    price: int
+    date_of_delivery: date
+    quantity: int
+
+class UserMedicine(UserMedicineBase):
+    product_obj: VendorProduct
+
+    class Config:
+        orm_mode = True
+
+
+class UserOxygenBase(BaseModel):
+    user_id: str
+    store_id: str
+    product_id: str
+    price: int
+    date_of_delivery: date
+    quantity: int
+
+class UserOxygen(UserOxygenBase):
+    product_obj: VendorProduct
 
     class Config:
         orm_mode = True

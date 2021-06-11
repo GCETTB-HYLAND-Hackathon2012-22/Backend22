@@ -65,7 +65,24 @@ def get_medicine(db: Session) -> List[schema.VendorProduct]:
 
 def set_appointment(db: Session, appointment: models.AppointmentListForUser) -> schema.AppointmentListForUser:
     '''Fixes Appointment as set by user'''
+    appointment = schema.AppointmentListForUser(**appointment.dict())
     db.add(appointment)
     db.commit()
     db.refresh(appointment)
     return appointment
+
+def book_oxygen(item: models.UserOxygenBase, db: Session) -> schema.UserOxygen:
+    '''Adds Order for Oxygen'''
+    item = schema.UserOxygen(**item.dict())
+    db.add(item)
+    db.commit()
+    db.refresh(item)
+    return item
+
+def book_medicine(item: models.UserMedicineBase, db: Session) -> schema.UserMedicine:
+    '''Adds Order for Oxygen'''
+    item = schema.UserMedicine(**item.dict())
+    db.add(item)
+    db.commit()
+    db.refresh(item)
+    return item
