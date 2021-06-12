@@ -1,6 +1,6 @@
 # Backend22: The Backend API for Miracurol 2.0
 
-Backend22 is a [FastAPI](https://fastapi.tiangolo.com/) based backend API created for the soul purpose of handling all backend essentials for the website Miracurol 2.0.
+Backend22 is a [FastAPI](https://fastapi.tiangolo.com/) based backend API created for the sole purpose of handling all backend essentials for the website Miracurol 2.0.
 
 Visit our website at [Miracurol 2.0](https://soumyajitnandi.000webhostapp.com/)
 
@@ -18,13 +18,13 @@ Visit our website at [Miracurol 2.0](https://soumyajitnandi.000webhostapp.com/)
 
 ## Main features
 
-- FastAPI as framework
+- FastAPI as the framework
     - Runs on Python
     - RESTful API
-- Access Token based Authentication
+- Access-Token based Authentication
 - Security
     - One-way Hashing for Password Management
-    - Non-public Informations can't be accessed without proper access token
+    - Non-public pieces of information can't be accessed without a proper access token
 - Built-in ML models for Medical Health Detection
 - Built-in PostgreSQL support
 
@@ -38,7 +38,7 @@ The backend is deployed at [Heroku](https://dashboard.heroku.com/apps) Server.
 
 Sorry Devs, currently this project has been developed for [2021 VIRTUAL HYLAND HACKATHON](https://www.hyland.com/en/explore/hy-tech/tech-outreach-overview/hyland-hackathon)
 
-So we are not accepting any Contributions except from our fellow team mates.
+So we are not accepting any Contributions except from our fellow teammates.
 
 But it will be opened for Contributions after the end of this event.
 
