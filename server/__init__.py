@@ -12,7 +12,7 @@ async def index(db: Session = Depends(get_db)):
 
 
 @router.get('/api/doctors', response_model=List[models.Doctor])
-async def get_doctors_list(db: Session = Depends(get_db), lat: int=None, long: int=None):
+async def get_doctors_list(db: Session = Depends(get_db), lat: float=None, long: float=None):
     '''Returns the list of all doctors'''
     return sorted(crud.get_doctors(db),
         key=lambda x: geolocation.distance_or_Inf(lat, long, x.user_obj.latitude, x.user_obj.longitude)
@@ -32,7 +32,7 @@ async def get_doctor_by_uid(uid: str, db: Session = Depends(get_db)):
 
 
 @router.get('/api/vendors', response_model=List[models.Vendor])
-async def get_vendors_list(db: Session = Depends(get_db), lat: int=None, long: int=None):
+async def get_vendors_list(db: Session = Depends(get_db), lat: float=None, long: float=None):
     '''Returns the list of all vendors in a paginated format'''
     return sorted(crud.get_vendors(db),
         key=lambda x: geolocation.distance_or_Inf(lat, long, x.user_obj.latitude, x.user_obj.longitude)
@@ -51,14 +51,14 @@ async def get_vendor_by_uid(uid: str, db: Session = Depends(get_db)):
 
 
 @router.get('/api/oxygen', response_model=List[models.VendorProduct])
-async def get_oxygen_list(db: Session = Depends(get_db), lat: int=None, long: int=None):
+async def get_oxygen_list(db: Session = Depends(get_db), lat: float=None, long: float=None):
     return sorted(crud.get_oxygen(db),
         key=lambda x: geolocation.distance_or_Inf(lat, long, x.vendor_obj.user_obj.latitude, x.vendor_obj.user_obj.longitude)
     )
 
 
 @router.get('/api/medicine', response_model=List[models.VendorProduct])
-async def get_medicine_list(db: Session = Depends(get_db), lat: int=None, long: int=None):
+async def get_medicine_list(db: Session = Depends(get_db), lat: float=None, long: float=None):
     return sorted(crud.get_medicine(db),
         key=lambda x: geolocation.distance_or_Inf(lat, long, x.vendor_obj.user_obj.latitude, x.vendor_obj.user_obj.longitude)
     )
