@@ -145,7 +145,7 @@ async def read_users_me(current_user: schema.User = Depends(get_current_active_u
 
 
 @router.get("/api/users/me_as_admin", response_model=models.Admin)
-async def read_users_me(db: Session = Depends(get_db), current_user: schema.User = Depends(get_current_active_user)):
+async def read_users_me_as_admin(db: Session = Depends(get_db), current_user: schema.User = Depends(get_current_active_user)):
     admin = crud.get_admin(db, current_user.user_id)
     if not admin:
         raise HTTPException(
@@ -157,12 +157,12 @@ async def read_users_me(db: Session = Depends(get_db), current_user: schema.User
 
 
 @router.get("/api/users/me/oxygen", response_model=List[models.UserOxygen])
-async def read_users_me(current_user: schema.User = Depends(get_current_active_user), db: Session = Depends(get_db)):
+async def read_users_me_oxygen(current_user: schema.User = Depends(get_current_active_user), db: Session = Depends(get_db)):
     '''Returns current logged-in user's oxygen booked details'''
     return crud.get_booked_oxygen(db, current_user.user_id)
 
 
 @router.get("/api/users/me/medicine", response_model=List[models.UserMedicine])
-async def read_users_me(current_user: schema.User = Depends(get_current_active_user), db: Session = Depends(get_db)):
+async def read_users_me_medicine(current_user: schema.User = Depends(get_current_active_user), db: Session = Depends(get_db)):
     '''Returns current logged-in user's medicine booked details'''
     return crud.get_booked_medicine(db, current_user.user_id)
