@@ -43,8 +43,7 @@
       "How can I consult with a doctor"
     ],
     "responses": [
-      "Go to our \"Services\" section then go to \"Appointment\"",
-      "Click Here : https://soumyajitnandi.000webhostapp.com/pages/appointment.html  \n to reach our specialists"
+      "Go to our \"Services\" section then go to \"Book an Appointment with Doctor\""
     ]
   },
   {
@@ -55,8 +54,7 @@
       "can I know my diseases from symptoms"
     ],
     "responses": [
-      "Go to our \"Services\" section then go to \"Predictor\"",
-      "Click Here : https://soumyajitnandi.000webhostapp.com/pages/test.php?  \n and make a self check up"
+      "Go to our \"Services\" section then go to \"Predict Disease\""
     ]
   },
   {
@@ -68,8 +66,7 @@
       "want to know oxygen price"
     ],
     "responses": [
-      "Go to our \"Services\" section then go to \"Oxygen\"",
-      "Click Here : https://soumyajitnandi.000webhostapp.com/pages/oxygen.html  \n and find details about oxygen suppliers and you can also order from them"
+      "Go to our \"Services\" section then go to \"Book Oxygen\""
     ]
   },
   {
@@ -82,8 +79,7 @@
       "want to know the pricing about Vaccination"
     ],
     "responses": [
-      "Go to our \"Services\" section then go to \"Vaccination\"",
-      "Click Here : https://soumyajitnandi.000webhostapp.com/pages/vaccine.html  \n and find details about Vaccination centres and book your slot for vaccination"
+      "Go to our \"Services\" section then go to \"Get Vaccinated\""
     ]
   },
   {
@@ -96,8 +92,7 @@
       "From where I can get medicine"
     ],
     "responses": [
-      "Go to our \"Services\" section then go to \"Medicine\"",
-      "Click Here : https://soumyajitnandi.000webhostapp.com/pages/medicine.html  \n and find details about shops and you can also order from there and it's free for delivery  "
+      "Go to our \"Services\" section then go to \"Order Medicine\""
     ]
   },
   {
@@ -111,8 +106,7 @@
       "Ambulance details about fare"
     ],
     "responses": [
-      "Go to our \"Services\" section then go to \"Ambulance\"",
-      "Click Here : https://soumyajitnandi.000webhostapp.com/pages/ambulance.html  \n and find details about oxygen suppliers and you can also order from them"
+      "Go to our \"Services\" section then go to \"Call Ambulance\""
     ]
   },
   {
@@ -121,7 +115,7 @@
       "How Can I contact U",
       "I need to talk to management"
     ],
-    "responses": ["Click here: https://soumyajitnandi.000webhostapp.com/pages/contact.html to contact us."]
+    "responses": ["Open menu and go to \"Contact\" to contact us."]
   },
   {
     "tag": "Social",
@@ -130,6 +124,6 @@
       "Facebook page link",
       "twitter page"
     ],
-    "responses": ["Click here: https://soumyajitnandi.000webhostapp.com/pages/social.html to reach our social sites."]
+    "responses": ["Open menu and go to \"Contact\" to contact us."]
   }
 ]}
