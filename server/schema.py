@@ -1,6 +1,5 @@
 # Objects representing actual Relations in the Database
 
-from typing import List
 from sqlalchemy.orm import relationship
 from .database import Base
 from sqlalchemy import Column, String, Date, Integer, BigInteger, Boolean, ForeignKey, Time, Numeric
@@ -122,3 +121,11 @@ class UserOxygen(Base):
     date_of_delivery = Column(Date)
     quantity = Column(Integer)
     address = Column(String)
+
+
+class FeedBack(Base):
+    __tablename__ = "feedback_db"
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    feedback = Column(String)

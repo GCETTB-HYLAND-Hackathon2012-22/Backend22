@@ -116,3 +116,8 @@ class UserOxygen(UserOxygenBase):
 
     class Config:
         orm_mode = True
+
+
+class FeedBack(BaseModel):
+    name: str = 'Anonymous'
+    feedback: str

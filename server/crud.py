@@ -95,3 +95,12 @@ def book_medicine(item: models.UserMedicineBase, db: Session) -> schema.UserMedi
 def get_booked_medicine(db: Session, uid: str) -> schema.UserMedicine:
     '''Get Booked Medicine Details by UID'''
     return db.query(schema.UserMedicine).filter(schema.UserMedicine.user_id == uid).all()
+
+
+def upload_feedback(db: Session, feed: models.FeedBack) -> schema.FeedBack:
+    '''Upload Feedback'''
+    item = schema.FeedBack(**feed.dict())
+    db.add(item)
+    db.commit()
+    db.refresh(item)
+    return item

@@ -138,3 +138,8 @@ async def get_max_oxygen(
         max_limit = 50
 
     return {'max_limit': max_limit}
+
+
+@router.post('/api/feedback')
+async def feedback(value: models.FeedBack, db: Session = Depends(get_db)) -> models.FeedBack:
+    return crud.upload_feedback(db, value)
