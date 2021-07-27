@@ -3,11 +3,38 @@ from fastapi import Depends, UploadFile, File, HTTPException, status
 from fastapi.responses import HTMLResponse
 from .router import router
 from .database import get_db, Session
+from .environ import Config
 from . import security, crud, models, ml_helper, dl_helper, geolocation, chatbot_helper
+import time
+import threading
+import requests
+import socket
+
+
+#######################################################################
+
+# Prevents server from sleeping
+
+class Periodic(threading.Thread):
+    def run(self):
+        while True:
+            time.sleep(10)
+            try:
+                requests.get('http://localhost:{}/api'.format(Config.PORT))
+            except Exception as e:
+                print("Error ->", e, flush=True)
+
+
+Periodic().start()
+
+
+
+#######################################################################
+
 
 @router.get('/api', response_class=HTMLResponse)
 async def index(db: Session = Depends(get_db)):
-    '''For Debug Purpose Only'''
+    '''For Debug Purpose Only ( Do Not Remove )'''
     return 'Hello API'
 
 

@@ -1,3 +1,4 @@
+import time
 from .environ import Config
 from .router import router
 from fastapi import Request, Response, status
@@ -21,12 +22,19 @@ Base = declarative_base()
 @router.middleware("http")
 async def db_session_middleware(request: Request, call_next):
     '''HTTP Middleware to add database session to each request entity'''
+    start_time = time.time()
     response = Response("Internal server error", status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
     try:
         request.state.db = SessionLocal()
         response = await call_next(request)
+    except Exception as e:
+        print("Error ->", e, flush=True) 
     finally:
         request.state.db.close()
+    process_time = time.time() - start_time
+    response.headers["X-Process-Time"] = str(process_time)
+    print('{} {} {}'.format(request.method, request.client.host, response.status_code), flush=True)
+    print("Time Taken -> {} secs".format(process_time), flush=True)
     return response
 
 

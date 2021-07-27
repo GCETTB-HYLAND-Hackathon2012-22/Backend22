@@ -12,6 +12,7 @@ psycopg2
 
 # UTILS
 pathlib
+requests
 
 
 # SECURITY
