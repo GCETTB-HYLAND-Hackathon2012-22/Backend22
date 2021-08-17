@@ -18,7 +18,7 @@ import socket
 class Periodic(threading.Thread):
     def run(self):
         while True:
-            time.sleep(10)
+            time.sleep(25 * 60)
             try:
                 requests.get('http://localhost:{}/api'.format(Config.PORT))
             except Exception as e:
