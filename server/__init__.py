@@ -20,7 +20,7 @@ class Periodic(threading.Thread):
         while True:
             time.sleep(25 * 60)
             try:
-                requests.get('http://localhost:{}/api'.format(Config.PORT))
+                requests.get(Config.SITE)
             except Exception as e:
                 print("Error ->", e, flush=True)
 
