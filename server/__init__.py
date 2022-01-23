@@ -15,17 +15,17 @@ import socket
 
 # Prevents server from sleeping
 
-class Periodic(threading.Thread):
-    def run(self):
-        while True:
-            time.sleep(25 * 60)
-            try:
-                requests.get(Config.SITE)
-            except Exception as e:
-                print("Error ->", e, flush=True)
+# class Periodic(threading.Thread):
+#     def run(self):
+#         while True:
+#             time.sleep(25 * 60)
+#             try:
+#                 requests.get(Config.SITE)
+#             except Exception as e:
+#                 print("Error ->", e, flush=True)
 
 
-Periodic().start()
+# Periodic().start()
 
 
 
